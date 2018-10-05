@@ -16,6 +16,9 @@ namespace Маятник
     {
         private static Pendulum _instance;
         private static object _locker = new object();
+        private static int STEPS = 50;
+        private static int ELLIPS_RADIUS = 40;
+
 
         /// <summary>
         /// Переменная направления маятника
@@ -27,7 +30,7 @@ namespace Маятник
         /// CounterClockwise - против часовой стрелки
         /// Clockwise - по часовой стрелке
         /// </summary>
-        private enum Direction 
+        private enum Direction
         {
             CounterClockwise = 0,
             Clockwise = 1
@@ -68,19 +71,19 @@ namespace Маятник
             return new Task(() =>
             {
                 Pen pen = new Pen(Color.Black, 2);
-                double radius = 100;
+                double radius = 150;
                 Graphics graphics = form.CreateGraphics();
 
                 int y0 = form.Size.Height / 2;
                 int x0 = form.Size.Width / 2;
 
-                int counter = 100;
+                int counter = 0;
                 double x = -1;
                 double y = y0;
-                double leftBorderX = -1 ;
 
-                double angle = 10;
-                double speed = 6;
+                double angle = 6;
+                double speed = 3;
+                int iterator = 0;
 
                 while (!token.IsCancellationRequested)
                 {
@@ -88,34 +91,56 @@ namespace Маятник
                     {
                         if (x < 0)
                         {
-                            x = x0 + radius * Math.Cos(DegreeToRadian(angle * speed));
-                            leftBorderX =x -( 2 *radius);
+                            x = x0 + radius * Math.Cos(DegreeToRadian((angle + iterator) * speed));
                         }
                         else
                         {
-                            x = x0 + radius * Math.Cos(DegreeToRadian(angle * speed));
-                            y = y0 + radius * Math.Sin(DegreeToRadian(angle * speed));
+                            x = x0 + radius * Math.Cos(DegreeToRadian((angle + iterator) * speed));
+                            y = y0 + radius * Math.Sin(DegreeToRadian((angle + iterator) * speed));
                         }
 
-                        if (x == leftBorderX)
+                        if (counter == STEPS)
                         {
                             _actiualDirection = (int)Direction.CounterClockwise;
                         }
-                        
+                        else
+                        {
+                            counter++;
+                            iterator++;
+                        }
                     }
                     else
                     {
-                        
+                        if (counter >= 0)
+                        {
+                            counter--;
+                            iterator--;
+                            x = x0 + radius * Math.Cos(DegreeToRadian((angle + iterator) * speed));
+                            y = y0 + radius * Math.Sin(DegreeToRadian((angle + iterator) * speed));
+
+
+                        }
+                        else
+                        {
+                            _actiualDirection = (int)Direction.Clockwise;
+                        }
                     }
-                    
+
+                    graphics.DrawEllipse(pen, (int)x - ELLIPS_RADIUS/2, (int)y -ELLIPS_RADIUS/2, ELLIPS_RADIUS, ELLIPS_RADIUS);
+                    //  graphics.FillEllipse(pen, (int)x +ELLIPS_RADIUS, (int)y+ELLIPS_RADIUS,ELLIPS_RADIUS,ELLIPS_RADIUS);
+
+
                     graphics.DrawLine(pen, new Point(x0, y0), new Point((int)x, (int)y));
-                    angle++;
-                    counter--;
                     Task.Delay(100).Wait();
                     graphics.Clear(Color.White);
                 }
             });
         }
+
+
+
+
+
 
 
         private double DegreeToRadian(double angle)
