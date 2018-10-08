@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Circle.cs" />
+    <Compile Include="GraphicLogic.cs" />
     <Compile Include="Pendulum.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

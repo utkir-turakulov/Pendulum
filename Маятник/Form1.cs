@@ -14,12 +14,12 @@ namespace Маятник
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {            
+        {
+            GraphicLogic logic = new GraphicLogic();
             if(startCount == 0)
             {
-                cancellation = new CancellationTokenSource();
-                Pendulum circle = Pendulum.GetInstance();
-                circle.Draw(this, cancellation.Token).Start();
+                cancellation = new CancellationTokenSource();               
+                logic.Draw(this, cancellation.Token).Start();
                 startCount++;
             }            
         }
