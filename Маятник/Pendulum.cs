@@ -11,7 +11,7 @@ namespace Маятник
         private static int ANGLE = 1;
         private static double STEP_INCREMENT = 1;
 
-        public Pen Pen { get; set; } = new Pen(Color.Black, 2);
+        public Pen Pen { get; set; } = new Pen(Color.Black, 1);
 
         public Pendulum()
         {

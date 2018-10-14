@@ -4,7 +4,7 @@ namespace Маятник
 {
     internal class Circle
     {
-        public Pen Pen { get; set; } = new Pen(Color.Black, 2);
+        public Pen Pen { get; set; } = new Pen(Color.Black, 1);
 
         public void Draw(Graphics graphics, Point center_point, Point end_point, float radius)
         {
