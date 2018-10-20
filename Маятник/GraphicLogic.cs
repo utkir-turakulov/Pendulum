@@ -62,6 +62,8 @@ namespace Маятник
 
             Panel sinusoidPanel = form.Controls["SinusoidPanel"] as Panel;
             Graphics sinusoidGraphics = sinusoidPanel?.CreateGraphics();
+            Graphics round = sinusoidPanel?.CreateGraphics();
+
 
             Pendulum pendulum = new Pendulum();
             Circle circle = new Circle();
@@ -86,12 +88,11 @@ namespace Маятник
                 float PENDULUM_Y = PENDULUM_BASE_Y;//FORM_BASE_Y;
                 int iterator = 0;
                 int circle_iterator = 0;
-
+                int sinusoidIterator = 0;
                 
 
-                float SINUSOID_BASE_X = sinusoidPanel.Size.Width /2 -100;//PENDULUM_BASE_X + 100;
+                float SINUSOID_BASE_X = sinusoidPanel.Size.Width /2 - 100;//PENDULUM_BASE_X + 100;
                 float SINUSOID_BASE_Y = sinusoidPanel.Size.Height/2 -20;//PENDULUM_BASE_Y+150;
-
 
                 while (!token.IsCancellationRequested)//пока не получена команда на прерывание потока
                 {
@@ -99,15 +100,11 @@ namespace Маятник
                     {
                         if (PENDULUM_X < 0 && CIRCLE_X < 0)
                         {
-                          //  PENDULUM_X =(float) GetNextMove(FORM_BASE_X, FORM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
                             PENDULUM_X =(float) GetNextMove(PENDULUM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
                             CIRCLE_X = CIRCLE_BASE_X - CIRCLE_RADIUS;
                         }
                         else
                         {
-                            // PENDULUM_X =(float) GetNextMove(FORM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
-                            // PENDULUM_Y =(float) GetNextMove(FORM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["y"];
-
                             PENDULUM_X = (float)GetNextMove(PENDULUM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
                             PENDULUM_Y =(float) GetNextMove(PENDULUM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["y"];
 
@@ -122,6 +119,8 @@ namespace Маятник
                         else
                         {
                             counter++;
+                            sinusoidIterator +=8;
+
                             iterator += (int)STEP_INCREMENT;
                             circle_iterator += (int)CIRCLE_STEP_INCREMENT;
                         }
@@ -131,11 +130,13 @@ namespace Маятник
                         if (counter >= 0)
                         {
                             counter--;
+                            if (sinusoidIterator != 0)
+                            {
+                                sinusoidIterator -= 8;
+                            }
+                            
                             iterator -= (int)STEP_INCREMENT;
                             circle_iterator -= (int)CIRCLE_STEP_INCREMENT;
-
-                            // PENDULUM_X = (float) GetNextMove(FORM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
-                            // PENDULUM_Y =(float) GetNextMove(FORM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["y"];
 
                             PENDULUM_X = (float)GetNextMove(PENDULUM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["x"];
                             PENDULUM_Y = (float)GetNextMove(PENDULUM_BASE_X, PENDULUM_BASE_Y, PENDULUM_RADIUS, iterator)["y"];
@@ -153,12 +154,12 @@ namespace Маятник
 
                     circle.Draw(circleGraphics, new Point((int)CIRCLE_BASE_X , (int)CIRCLE_BASE_Y ), new Point((int)CIRCLE_X, (int)CIRCLE_Y), (int)CIRCLE_RADIUS);
 
-                    sinusoid.Animation(sinusoidGraphics, Color.DodgerBlue, (int)SINUSOID_BASE_X, (int)SINUSOID_BASE_X +200 , (int)SINUSOID_BASE_Y);
-                    sinusoid.MoveCircle(sinusoidGraphics, Color.Violet, (int)(SINUSOID_BASE_X) + iterator, (int)SINUSOID_BASE_Y+ 200, 5, iterator);
-                    
+                    // sinusoid.MoveCircle(round, (int)sinusoidPoints[sinusoidIterator].X, (int)sinusoidPoints[sinusoidIterator].Y, 5, iterator);
+                    sinusoid.Animation(sinusoidGraphics, Color.DodgerBlue, (int)SINUSOID_BASE_X, (int)SINUSOID_BASE_X + 200, (int)SINUSOID_BASE_Y,sinusoidIterator);
                     Task.Delay(150).Wait();
                     circleGraphics.Clear(Color.White);
                     pendulumPanelGraphics.Clear(Color.White);
+                    sinusoidGraphics.Clear(Color.White);
                 }
             });
         }

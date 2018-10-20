@@ -65,7 +65,7 @@
             this.SinusoidPanel.BackColor = System.Drawing.Color.White;
             this.SinusoidPanel.Location = new System.Drawing.Point(861, 187);
             this.SinusoidPanel.Name = "SinusoidPanel";
-            this.SinusoidPanel.Size = new System.Drawing.Size(377, 207);
+            this.SinusoidPanel.Size = new System.Drawing.Size(377, 223);
             this.SinusoidPanel.TabIndex = 2;
             // 
             // PendulumPanel

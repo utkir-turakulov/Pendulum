@@ -7,7 +7,7 @@ namespace Маятник
 {
     class Sinusoid
     {
-        public Pen Pen { get; set; } = new Pen(Color.Black, 3);
+        public Pen Pen { get; set; } = new Pen(Color.Black);
 
         /// <summary>
         /// Амплитуда графика
@@ -35,7 +35,7 @@ namespace Маятник
         /// <param name="start_x">Начало отрисовки</param>
         /// <param name="end_x">Конец отрисовки</param>
         /// <param name="width">Ширина графика</param>
-        public void Animation(Graphics grfx, Color clr, int start_x, int end_x, int width)
+        public List<PointF> Animation(Graphics grfx, Color clr, int start_x, int end_x, int width,int step)
         {
             List<PointF> points = new List<PointF>();
 
@@ -61,6 +61,17 @@ namespace Маятник
                 new Pen(clr),
                 new_points.ToArray());
 
+            if (step < new_points.Count)
+            {
+                grfx.DrawEllipse(
+                Pen,
+               new_points[step].X - (25 / 2),
+               new_points[step].Y - (25 / 2),
+               25,
+               25
+                );
+            }
+           
             //Ось Х
             grfx.DrawLine(
                    new Pen(Color.Black),
@@ -90,19 +101,8 @@ namespace Маятник
                     Y = extremums["min"]
                 });
 
-
+            return new_points;
         }
-
-
-        public void MoveCircle(Graphics graphics, Color color, int start_x, int end_x, int radius, int step)
-        {
-            float y = (float)(Amplitude * Math.Sin((2.0f * Math.PI * Frequency * step + start_x / (end_x)) + Phase)) + PaddingTop;
-
-            graphics.DrawEllipse(new Pen(color), start_x - radius / 2, y - radius / 2, radius, radius);
-
-        }
-
-
         private Dictionary<string, float> GetGraphicsCenter(PointF[] points)
         {
             float min = points[0].Y;
@@ -126,61 +126,6 @@ namespace Маятник
             }
             min = points[top_point].Y;
             for (int i = top_point; i < points.Length; i++)
-            {
-                if (min <= points[i].Y && !min_achived)
-                {
-                    min = points[i].Y;
-                }
-                else
-                {
-                    min_achived = true;
-                }
-            }
-
-            return new Dictionary<string, float>()
-            {
-                {"max", max },
-                {"min",min }
-
-            };
-        }
-
-        private Dictionary<string, float> GetGraphicsCenter(int start_x, int end_x)
-        {
-            List<PointF> points = new List<PointF>();
-
-            for (int i = start_x; i <= end_x; i++)
-            {
-                float y = (float)(Amplitude * Math.Sin((2.0f * Math.PI * Frequency * i / (end_x)) + Phase)) + PaddingTop;
-
-                points.Add(new PointF()
-                {
-                    X = i,
-                    Y = y
-                });
-            }
-
-            float min = points[0].Y;
-            float max = points[0].Y;
-
-            int top_point = 0;
-            bool min_achived = false;
-
-            for (int i = 1; i < points.Count; i++)
-            {
-                if (max >= points[i].Y)
-                {
-                    max = points[i].Y;
-                }
-                else
-                {
-                    top_point = i;
-                    break;
-                }
-
-            }
-            min = points[top_point].Y;
-            for (int i = top_point; i < points.Count; i++)
             {
                 if (min <= points[i].Y && !min_achived)
                 {
