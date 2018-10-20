@@ -154,7 +154,7 @@ namespace Маятник
                     circle.Draw(circleGraphics, new Point((int)CIRCLE_BASE_X , (int)CIRCLE_BASE_Y ), new Point((int)CIRCLE_X, (int)CIRCLE_Y), (int)CIRCLE_RADIUS);
 
                     sinusoid.Animation(sinusoidGraphics, Color.DodgerBlue, (int)SINUSOID_BASE_X, (int)SINUSOID_BASE_X +200 , (int)SINUSOID_BASE_Y);
-                    sinusoid.MoveCircle(sinusoidGraphics, Color.Violet, (int)(SINUSOID_BASE_X), (int)SINUSOID_BASE_Y+ 200, 5, iterator);
+                    sinusoid.MoveCircle(sinusoidGraphics, Color.Violet, (int)(SINUSOID_BASE_X) + iterator, (int)SINUSOID_BASE_Y+ 200, 5, iterator);
                     
                     Task.Delay(150).Wait();
                     circleGraphics.Clear(Color.White);
