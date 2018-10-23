@@ -26,7 +26,6 @@ namespace Маятник
         /// </summary>
         public float PaddingTop { get; set; } = 120;
 
-
         /// <summary>
         /// Отрисовка графика
         /// </summary>
@@ -35,7 +34,7 @@ namespace Маятник
         /// <param name="start_x">Начало отрисовки</param>
         /// <param name="end_x">Конец отрисовки</param>
         /// <param name="width">Ширина графика</param>
-        public List<PointF> Animation(Graphics grfx, Color clr, int start_x, int end_x, int width,int step)
+        public List<PointF> Draw(Graphics grfx, Color clr, int start_x, int end_x, int width,int step)
         {
             List<PointF> points = new List<PointF>();
 
@@ -103,6 +102,12 @@ namespace Маятник
 
             return new_points;
         }
+
+        /// <summary>
+        /// Определяет центр графика для отрисовки оси
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         private Dictionary<string, float> GetGraphicsCenter(PointF[] points)
         {
             float min = points[0].Y;

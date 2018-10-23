@@ -29,6 +29,11 @@ namespace Маятник
             cancellation.Cancel();
             startCount = 0;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     }
 

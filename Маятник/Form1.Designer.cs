@@ -33,6 +33,16 @@
             this.SinusoidPanel = new System.Windows.Forms.Panel();
             this.PendulumPanel = new System.Windows.Forms.Panel();
             this.CirclePanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.speed = new System.Windows.Forms.Label();
+            this.angle = new System.Windows.Forms.Label();
+            this.radius = new System.Windows.Forms.Label();
+            this.baseX = new System.Windows.Forms.Label();
+            this.baseY = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -84,12 +94,107 @@
             this.CirclePanel.Size = new System.Drawing.Size(305, 282);
             this.CirclePanel.TabIndex = 4;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Скорость";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Угловое отклонение";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Радиус";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "X0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 116);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Y0";
+            // 
+            // speed
+            // 
+            this.speed.AutoSize = true;
+            this.speed.Location = new System.Drawing.Point(151, 9);
+            this.speed.Name = "speed";
+            this.speed.Size = new System.Drawing.Size(0, 13);
+            this.speed.TabIndex = 10;
+            // 
+            // angle
+            // 
+            this.angle.AutoSize = true;
+            this.angle.Location = new System.Drawing.Point(151, 38);
+            this.angle.Name = "angle";
+            this.angle.Size = new System.Drawing.Size(0, 13);
+            this.angle.TabIndex = 11;
+            // 
+            // radius
+            // 
+            this.radius.AutoSize = true;
+            this.radius.Location = new System.Drawing.Point(151, 66);
+            this.radius.Name = "radius";
+            this.radius.Size = new System.Drawing.Size(0, 13);
+            this.radius.TabIndex = 12;
+            // 
+            // baseX
+            // 
+            this.baseX.AutoSize = true;
+            this.baseX.Location = new System.Drawing.Point(151, 93);
+            this.baseX.Name = "baseX";
+            this.baseX.Size = new System.Drawing.Size(0, 13);
+            this.baseX.TabIndex = 13;
+            // 
+            // baseY
+            // 
+            this.baseY.AutoSize = true;
+            this.baseY.Location = new System.Drawing.Point(151, 116);
+            this.baseY.Name = "baseY";
+            this.baseY.Size = new System.Drawing.Size(0, 13);
+            this.baseY.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1250, 736);
+            this.Controls.Add(this.baseY);
+            this.Controls.Add(this.baseX);
+            this.Controls.Add(this.radius);
+            this.Controls.Add(this.angle);
+            this.Controls.Add(this.speed);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.CirclePanel);
             this.Controls.Add(this.PendulumPanel);
             this.Controls.Add(this.SinusoidPanel);
@@ -100,7 +205,9 @@
             this.MinimumSize = new System.Drawing.Size(1266, 775);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -111,6 +218,16 @@
         private System.Windows.Forms.Panel SinusoidPanel;
         private System.Windows.Forms.Panel PendulumPanel;
         private System.Windows.Forms.Panel CirclePanel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label speed;
+        private System.Windows.Forms.Label angle;
+        private System.Windows.Forms.Label radius;
+        private System.Windows.Forms.Label baseX;
+        private System.Windows.Forms.Label baseY;
     }
 }
 
